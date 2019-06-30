@@ -1,0 +1,161 @@
+﻿@model ArchivoUH.Models.ProvinceViewModel
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Editar</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/sbAdmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/sbAdmin/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <!-- Render the Sidebar like partial view-->
+        @{
+            Html.RenderPartial("_Sidebar");
+        }
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <!-- Render the Topbar like partial view in page content -->
+                @{
+                    Html.RenderPartial("_Topbar");
+                }
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Add Elements Here... -->
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Editar provincia: @Model.ProvinceName</h1>
+
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold text-primary">Edición de Provincia</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="border-left-warning">
+                            <div class="card-body">
+                                Edite el nombre de la provincia seleccionada, no puede dejar vacío este campo
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-7">
+                            @using (Html.BeginForm("Edit", "Provinces"))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(model => model.ProvinceId)
+
+                                <!-- Collapsable Card Example -->
+                                <div class="card shadow mb-4">
+                                    <!-- Card Header - Accordion -->
+                                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                        <h6 class="m-0 font-weight-bold text-primary">Datos de la Provinica</h6>
+                                    </a>
+                                    <!-- Card Content - Collapse -->
+                                    <div class="collapse show" id="collapseCardExample">
+                                        <div class="card-body ">
+                                            <div class="border-left-success">
+                                                <div class="card-body">
+                                                    Los campos siguientes se relacionan con la información de la provincia
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="col-md-3">Nombre de la Provincia</label>
+                                                @Html.EditorFor(model => model.ProvinceName, new { htmlAttributes = new { @class = "form-control col-md-4" } })
+                                                @Html.ValidationMessageFor(m => m.ProvinceName, "", new { @class = "text-danger col-md-3" })
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="col-md-3">Cambiar el País</label>
+                                                @Html.DropDownListFor(model => model.CountryId, (SelectList)ViewBag.Countries, new { @class = "form-control col-md-4" })
+                                                @Html.ValidationMessageFor(m => m.CountryId, "", new { @class = "text-danger col-md-3" })
+                                            </div>
+
+                                            <br />
+
+                                            <a class="btn btn-success btn-icon-split">
+                                                <input type="submit" value="Editar Provincia" class="btn btn-success" />
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-pen-alt"></i>
+                                                </span>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <!-- Rendering Page Footer like partial view -->
+            @{
+                Html.RenderPartial("_Footer");
+            }
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal -->
+    <!-- Render Logout Modal for all view -->
+    @{
+        Html.RenderPartial("_LogoutModal");
+    }
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/sbAdmin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/sbAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/sbAdmin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/sbAdmin/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,336 @@
+﻿@model ArchivoUH.Models.GraduatedViewModel
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Editar</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/sbAdmin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/sbAdmin/css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <!-- Render the Sidebar like partial view-->
+        @{
+            Html.RenderPartial("_Sidebar");
+        }
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <!-- Render the Topbar like partial view in page content -->
+                @{
+                    Html.RenderPartial("_Topbar");
+                }
+
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Add Elements Here... -->
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Editar Graduado</h1>
+
+                    <div class="card-header">
+                        <h6 class="m-0 font-weight-bold text-primary">Edición de Graduado</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="border-left-warning">
+                            <div class="card-body">
+                                Los campos con (*) deben contener un valor válido para poder realizar las modificaciones
+                                deseadas, los campos opcionales pueden ser vaciados, eliminando la información que contienen
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @using (Html.BeginForm("Edit", "Graduates", FormMethod.Post))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.GraduatedId)
+
+                            if (ViewBag.ShowValidation)
+                            {
+                                <div class="card-body">
+                                    <div class="border-left-danger">
+                                        <div class="card-body">
+                                            @Html.ValidationSummary()
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Serial del Archivo <i class="fas fa-asterisk"></i></h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="border-left-success">
+                                                <div class="card-body">
+                                                    El Serial se compone de dos partes ambas de 3 números, y de
+                                                    un tipo, el cual puede ser <i class="font-weight-bold">NEW</i> u
+                                                    <i class="font-weight-bold">OLD</i>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-2">Serial 1</label>
+                                                @Html.EditorFor(m => m.Serial1, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-2">Serial 2</label>
+                                                @Html.EditorFor(m => m.Serial2, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-2">Tipo</label>
+                                                @Html.DropDownListFor(m => m.SerialType, (SelectList)ViewBag.Types, new { @class = "form-control col-md-2" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Fechas <i class="fas fa-asterisk"></i></h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="border-left-success">
+                                                <div class="card-body">
+                                                    La fecha de expedición debe ser posterior a la fecha de finalización
+                                                </div>
+                                            </div>
+                                            <!-- Date -->
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <label class="h6 col-md-3">Finalización</label>
+                                                @Html.EditorFor(m => m.FinishTime, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <label class="h6 col-md-3">Expedición</label>
+                                                @Html.EditorFor(m => m.ExpeditionTime, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Información Opcional</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="border-left-success">
+                                                <div class="card-body">
+                                                    Los campos causas y observaciones referentes al graduado son opcionales,
+                                                    para vaciarlos, elimine la información que contienen
+                                                </div>
+                                            </div>
+                                            <!-- Causes -->
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-2">Causas</label>
+                                                @Html.EditorFor(m => m.ExpeditionCauses, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-1"></div>
+                                                <label class="h6 col-md-3">Observaciones</label>
+                                                @Html.EditorFor(m => m.Observations, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-lg-6">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Datos del Graduado <i class="fas fa-asterisk"></i></h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="border-left-success">
+                                                <div class="card-body">
+                                                    Modifique el nombre y los apellidos del estudiante graduado, para establecer el lugar
+                                                    de residencia del graduado, primeramente seleccione el país, luego la provincia y finalmente
+                                                    la localidad
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Nombre(s)</label>
+                                                @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Apellidos</label>
+                                                @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                            </div>
+                                            <br />
+                                            <!-- Improve -->
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Pais</label>
+                                                @Html.DropDownListFor(m => m.CountrySelected, (SelectList)ViewBag.Countries, htmlAttributes: new { @class = "form-control col-md-5", @id = "Country" })
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Provincia</label>
+                                                @Html.DropDownListFor(m => m.ProvinceSelected, (SelectList)ViewBag.Provinces, htmlAttributes: new { @class = "form-control col-md-5", @id = "Province" })
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Localidad</label>
+                                                @Html.DropDownListFor(m => m.LocalityId, (SelectList)ViewBag.Localities, htmlAttributes: new { @class = "form-control col-md-5", @id = "Locality" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Ubicación en la UH <i class="fas fa-asterisk"></i></h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="border-left-success">
+                                                <div class="card-body">
+                                                    Modifique la Facultad y la Carrera a la que pertenece el estudiante graduado,
+                                                    además de los números UH
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Facultad</label>
+                                                @Html.DropDownListFor(m => m.FacultyId, (SelectList)ViewBag.Faculties, htmlAttributes: new { @class = "form-control col-md-6" })
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Carrera</label>
+                                                @Html.DropDownListFor(m => m.CourseId, (SelectList)ViewBag.Courses, htmlAttributes: new { @class = "form-control col-md-6" })
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Tomo UH</label>
+                                                @Html.EditorFor(m => m.TomeUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Folio UH</label>
+                                                @Html.EditorFor(m => m.FolioUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-3">Número UH</label>
+                                                @Html.EditorFor(m => m.NumberUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary">Aspectos Destacados</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="border-left-success">
+                                                <div class="card-body">
+                                                    Seleccione dependiendo si el graduado fue titulo de oro o mérito cientifico
+                                                </div>
+                                            </div>
+                                            <!-- Causes -->
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-4">Titulo de Oro</label>
+                                                @Html.EditorFor(m => m.GoldTitle, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                                            </div>
+                                            <br />
+                                            <div class="row">
+                                                <div class="col-md-2"></div>
+                                                <label class="h6 col-md-4">Merito Cientifico</label>
+                                                @Html.EditorFor(m => m.ScientistCredit, new { htmlAttributes = new { @class = "form-control col-md-6" } })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <center>
+                                <a class="btn btn-success btn-icon-split">
+                                    <input type="submit" value="Editar" class="btn btn-success" />
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-pen-alt"></i>
+                                    </span>
+                                </a>
+                            </center>
+                        }
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+            <br />
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <!-- Rendering Page Footer like partial view -->
+            @{
+                Html.RenderPartial("_Footer");
+            }
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal -->
+    <!-- Render Logout Modal for all view -->
+    @{
+        Html.RenderPartial("_LogoutModal");
+    }
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/sbAdmin/vendor/jquery/jquery.min.js"></script>
+    <script src="~/sbAdmin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/sbAdmin/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/sbAdmin/js/sb-admin-2.min.js"></script>
+
+    <script src="~/Scripts/populateLocation.js"></script>
+
+</body>
+
+</html>

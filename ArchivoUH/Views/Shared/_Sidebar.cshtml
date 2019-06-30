@@ -1,0 +1,123 @@
+﻿<!-- Sidebar -->
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fas fa-file-alt"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Archivo UH</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href=@Url.Action("Index","Home")>
+            <i class="fas fa-fw fa-home"></i>
+            <span>Inicio</span>
+        </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Archivos
+    </div>
+
+    <!-- Tablas de Archivos Start -->
+    <!-- Nav Item - Graduados -->
+    <li class="nav-item">
+        <a class="nav-link" href=@Url.Action("Index", "Graduates")>
+            <i class="fas fa-fw fa-table"></i>
+            <span>Graduados</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Bajas -->
+    <li class="nav-item">
+        <a class="nav-link" href=@Url.Action("Index", "Leaves")>
+            <i class="fas fa-fw fa-table"></i>
+            <span>Bajas</span>
+        </a>
+    </li>
+
+    <!-- Nav Item - Administrativos -->
+    <li class="nav-item">
+        <a class="nav-link" href=@Url.Action("Index", "Administratives")>
+            <i class="fas fa-fw fa-table"></i>
+            <span>Administrativos</span>
+        </a>
+    </li>
+
+    <!-- Tablas de Archivos End -->
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    @if (Request.IsAuthenticated && User.Identity.Name == "admin")
+    {
+
+        <!-- Heading Admin Tools -->
+        <div class="sidebar-heading">
+            Herramientas
+        </div>
+
+        <!-- Nav Item - Nomencladores -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <i class="fas fa-fw fa-cog"></i>
+                <span>Nomencladores</span>
+            </a>
+            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <!-- Localizacion -->
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header"><i class="fas fa-globe-americas"></i> Localización</h6>
+                    @Html.ActionLink("Paises", "Index", "Countries", new { }, new { @class = "collapse-item" })
+                    @Html.ActionLink("Provincias", "Index", "Provinces", new { }, new { @class = "collapse-item" })
+                    @Html.ActionLink("Localidades", "Index", "Localities", new { }, new { @class = "collapse-item" })
+                </div>
+
+                <!-- Universidad -->
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header"><i class="fas fa-university"></i> Universidad</h6>
+                    @Html.ActionLink("Facultades", "Index", "Faculties", new { }, new { @class = "collapse-item" })
+                    @Html.ActionLink("Carreras", "Index", "Courses", new { }, new { @class = "collapse-item" })
+                </div>
+
+                <!-- Archivo -->
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header"><i class="fas fa-file-alt"></i> Archivo</h6>
+                    @Html.ActionLink("Palabras Clave", "Index", "KeyWords", new { }, new { @class = "collapse-item" })
+                </div>
+            </div>
+        </li>
+
+        <!-- Nav Item - Menu User Manager -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Administración</span>
+            </a>
+            <div id="collapseUtilities" class="collapse" aria-lab elledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header"><i class="fas fa-users-cog"></i> Usuarios</h6>
+                    @Html.ActionLink("Registrar", "Register", "Account", new { }, new { @class = "collapse-item" })
+                    @Html.ActionLink("Administrar", "Index", "Users", new { }, new { @class = "collapse-item" })
+                </div>
+            </div>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+    }
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->

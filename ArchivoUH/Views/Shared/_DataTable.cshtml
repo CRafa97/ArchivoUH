@@ -1,0 +1,96 @@
+﻿@model ArchivoUH.Models.TableViewModel
+
+@{
+    var headers = Model.Headers.Where(x => x != "Key");
+    var rows = Model.Rows;
+}
+
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <div class="row">
+            <h5 class="m-0 font-weight-bold text-primary col-md-8">@Model.TableName</h5>
+
+            @if (Model.WithExportToExcel)
+            {
+                <div class="col-md-2">
+                    <a class="btn btn-primary btn-icon-split" href=@Url.Action("ExportExcel")>
+                        <span class="btn btn-primary">
+                            Exportar
+                        </span>
+                        <span class="icon text-white-50">
+                            <i class="fas fa-file-excel"></i>
+                        </span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-2"></div>
+            }
+
+            @if (Model.WithCreateLink)
+            {
+                <div class="col-md-1">
+                    <a class="btn btn-primary btn-icon-split" href=@Url.Action("Create")>
+                        <span class="btn btn-primary">
+                            Añadir
+                        </span>
+                        <span class="icon text-white-50">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                    </a>
+                </div>
+            }
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        @foreach (var header in headers)
+                        {
+                            <th>@header</th>
+                        }
+                        <th align="left" width="80"></th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var row in rows)
+                    {
+                        <tr>
+                            @foreach (var header in headers)
+                            {
+                                var sample = row.GetType().GetProperty(header).GetValue(row);
+                                string rep = sample is DateTime ? ((DateTime)sample).ToShortDateString() : sample.ToString();  
+                                <td>@rep</td>
+                            }
+                            <td>
+                                @{
+                                    object key = row.GetType().GetProperty("Key").GetValue(row);
+                                }
+                                <center>
+                                    <a class="btn btn-warning btn-circle btn-sm" href=@Url.Action("Edit", new { id=key })>
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                    <a class="btn btn-info btn-circle btn-sm" href=@Url.Action("Details", new { id=key })>
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                    @if (Request.IsAuthenticated && User.Identity.Name == "admin")
+                                    {
+                                        <a class="btn btn-danger btn-circle btn-sm" href=@Url.Action("Delete", new { id = key })>
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    }
+                                </center>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
