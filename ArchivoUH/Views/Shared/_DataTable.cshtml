@@ -65,7 +65,17 @@
                             @foreach (var header in headers)
                             {
                                 var sample = row.GetType().GetProperty(header).GetValue(row);
-                                string rep = sample is DateTime ? ((DateTime)sample).ToShortDateString() : sample.ToString();  
+                                string rep = "";
+                                if (sample is DateTime)
+                                {
+                                    var date = (DateTime)sample;
+                                    rep = $"{date.Year}/{date.Month}/{date.Day}";
+                                }
+                                else
+                                {
+                                    rep = sample.ToString();
+                                }
+
                                 <td>@rep</td>
                             }
                             <td>

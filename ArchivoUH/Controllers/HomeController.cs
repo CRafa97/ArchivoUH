@@ -40,8 +40,25 @@ namespace ArchivoUH.Controllers
                 Label2 = "Bajas",
                 Data2 = leav_per_years.Select(x => x.Count()).Reverse().ToList()
             };
-            bar.MaxTick = Math.Max(bar.Data1.Max(), bar.Data2.Max()) + 5;
-            bar.MaxTick -= bar.MaxTick % 5;
+
+            if(grad_per_years.Count != 0 && leav_per_years.Count != 0)
+            {
+                bar.MaxTick = Math.Max(bar.Data1.Max(), bar.Data2.Max()) + 5;
+                bar.MaxTick -= bar.MaxTick % 5;
+            }
+            else
+            {
+                ViewBag.ValidGraphics = false;
+                ViewBag.SelectedFaculty = faculty;
+                ViewBag.FacNames = ctx.Faculties.Select(x => x.FacultyName).ToList();
+                return View(new IndexCharts()
+                {
+                    BarChart = new BarChart() { CanvasName = "canvas1" },
+                    Comparison = new AreaChart() { CanvasName = "canvas2" },
+                    FacChart = new PieChart() { CanvasName = "canvas3" },
+                    PieChart = new PieChart() { CanvasName = "canvas4" }
+                });
+            }
 
             //6 carrers with more graduates
             var most_carrers = grad_per_years.First().GroupBy(g => g.Course.CourseName).OrderByDescending(gr => gr.Count()).Take(6).ToList();
@@ -77,6 +94,7 @@ namespace ArchivoUH.Controllers
                 Comparison = FacultyAreaGraph(faculty)
             };
 
+            ViewBag.ValidGraphics = true;
             ViewBag.SelectedFaculty = faculty;
             ViewBag.FacNames = ctx.Faculties.Select(x => x.FacultyName).ToList();
             return View(model);

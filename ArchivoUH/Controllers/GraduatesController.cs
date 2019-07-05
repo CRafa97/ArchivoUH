@@ -19,20 +19,20 @@ namespace ArchivoUH.Controllers
         // GET: Graduates
         public ActionResult Index()
         {
-            var headers = new[] { "Key", "Expedición", "Apellidos", "Nombre", "Nacionalidad", "Finalización",
-                                    "Carrera", "Facultad"};
+            var headers = new[] { "Key", "Serial", "Expedición", "Apellidos", "Nombre", "Finalización",
+                                    "Carrera", "SerialUH"};
 
             var rows = (from grd in ctx.Graduates.ToList()
                        select new
                        {
                            Key = grd.GraduatedId,
+                           Serial = $"{grd.Serial1}-{grd.Serial2}-{grd.SerialType}",
                            Expedición = grd.ExpeditionTime,
                            Apellidos = grd.LastName,
                            Nombre = grd.FirstName,
-                           Nacionalidad = grd.Locality.Province.Country.CountryName,
                            Finalización = grd.FinishTime,
                            Carrera = grd.Course.CourseName,
-                           Facultad = grd.Faculty.FacultyName
+                           SerialUH = $"{grd.TomeUH}-{grd.FolioUH}-{grd.NumberUH}"
                        });
 
             var model = new GraduatedViewModel()
@@ -123,8 +123,11 @@ namespace ArchivoUH.Controllers
             var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId == grad.Locality.Province.CountryId) : Enumerable.Empty<Province>()).ToList();
             var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId == grad.Locality.ProvinceId) : Enumerable.Empty<Locality>()).ToList();
 
-            ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", grad.Locality.Province.CountryId.ToString());
-            ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", grad.Locality.Province.ProvinceId.ToString());
+            var selectCountry = grad.Locality.Province.CountryId.ToString();
+            var selectProv = grad.Locality.Province.ProvinceId.ToString();
+
+            ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", selectCountry);
+            ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", selectProv);
             ViewBag.Localities = new SelectList(locals, "LocalityId", "LocalityName", grad.LocalityId.ToString());
 
             return View(new GraduatedViewModel(grad));
@@ -141,10 +144,10 @@ namespace ArchivoUH.Controllers
                 ViewBag.Faculties = new SelectList(ctx.Faculties, "FacultyId", "FacultyName", model.FacultyId);
                 ViewBag.Courses = new SelectList(ctx.Courses, "CourseId", "CourseName", model.CourseId);
                 var cs = ctx.Countries.ToList();
-                var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId == cs[0].CountryId) : Enumerable.Empty<Province>()).ToList();
-                var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId == provs[0].ProvinceId) : Enumerable.Empty<Locality>()).ToList();
+                var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId.ToString() == model.CountrySelected) : Enumerable.Empty<Province>()).ToList();
+                var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId.ToString() == model.ProvinceSelected) : Enumerable.Empty<Locality>()).ToList();
                 ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", model.CountrySelected);
-                ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", model.ProvinceSelected ?? provs[0].ProvinceId.ToString());
+                ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", model.ProvinceSelected ?? "");
                 ViewBag.Localities = new SelectList(locals, "LocalityId", "LocalityName", (model.LocalityId as int?) ?? locals[0].LocalityId);
                 return View(model);
             }

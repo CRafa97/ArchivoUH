@@ -150,7 +150,17 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-area">
-                                        <canvas id=@Model.BarChart.CanvasName></canvas>
+                                        @if (ViewBag.ValidGraphics)
+                                        {
+                                            <canvas id=@Model.BarChart.CanvasName></canvas>
+                                        }
+                                        else
+                                        {
+                                            <center>
+                                                No existen datos suficientes para la 
+                                                creación de este gráfico
+                                            </center>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -167,7 +177,17 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-6 pb-3">
-                                        <canvas id=@Model.PieChart.CanvasName></canvas>
+                                        @if (ViewBag.ValidGraphics)
+                                        {
+                                            <canvas id=@Model.PieChart.CanvasName></canvas>
+                                        }
+                                        else
+                                        {
+                                            <center>
+                                                No existen datos suficientes para la
+                                                creación de este gráfico
+                                            </center>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -196,7 +216,17 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-6 pb-3">
-                                        <canvas id=@Model.FacChart.CanvasName></canvas>
+                                        @if (ViewBag.ValidGraphics)
+                                        {
+                                            <canvas id=@Model.FacChart.CanvasName></canvas>
+                                        }
+                                        else
+                                        {
+                                            <center>
+                                                No existen datos suficientes para la
+                                                creación de este gráfico
+                                            </center>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -224,7 +254,17 @@
                                 <!-- Card Body -->
                                 <div class="card-body">
                                     <div class="chart-pie pt-6 pb-3">
-                                        <canvas id=@Model.Comparison.CanvasName></canvas>
+                                        @if (ViewBag.ValidGraphics)
+                                        {
+                                            <canvas id=@Model.Comparison.CanvasName></canvas>
+                                        }
+                                        else
+                                        {
+                                            <center>
+                                                No existen datos suficientes para la
+                                                creación de este gráfico
+                                            </center>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -272,7 +312,8 @@
 
     <!-- Page level custom scripts -->
     <script src="~/sbAdmin/js/demo/chart-area-demo.js"></script>
-    @{
+    @if (ViewBag.ValidGraphics)
+    {
         Html.RenderPartial("_BarChart", Model.BarChart);
         Html.RenderPartial("_PieChart", Model.PieChart);
         Html.RenderPartial("_PieChart", Model.FacChart);
