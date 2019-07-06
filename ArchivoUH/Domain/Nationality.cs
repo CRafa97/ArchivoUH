@@ -17,6 +17,8 @@ namespace ArchivoUH.Domain
         public string CountryName { get; set; }
 
         public virtual ICollection<Province> Provinces { get; set; }
+
+        public virtual ICollection<Graduated> Graduates { get; set; }
     }
 
     public class Province
@@ -35,6 +37,8 @@ namespace ArchivoUH.Domain
         public virtual Country Country { get; set; }
 
         public virtual ICollection<Locality> Localities { get; set; }
+
+        public virtual ICollection<Graduated> Graduates { get; set; }
     }
 
     public class Locality

@@ -221,6 +221,10 @@
     <Compile Include="Migrations\201906091851574_administratives.Designer.cs">
       <DependentUpon>201906091851574_administratives.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201907061942489_change_ubications.cs" />
+    <Compile Include="Migrations\201907061942489_change_ubications.Designer.cs">
+      <DependentUpon>201907061942489_change_ubications.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ArchiveViewModels.cs" />
@@ -232,6 +236,7 @@
     <Compile Include="Models\UniversityViewModels.cs" />
     <Compile Include="Models\UserViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\Logger.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Validations\CustomAuthorize.cs" />
     <Compile Include="Validations\DataComparison.cs" />
@@ -2141,6 +2146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201906091851574_administratives.resx">
       <DependentUpon>201906091851574_administratives.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907061942489_change_ubications.resx">
+      <DependentUpon>201907061942489_change_ubications.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

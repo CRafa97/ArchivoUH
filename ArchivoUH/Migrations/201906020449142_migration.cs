@@ -121,7 +121,7 @@ namespace ArchivoUH.Migrations
                         GraduatedId = c.Int(nullable: false, identity: true),
                         FirstName = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 100),
-                        LocalityId = c.Int(nullable: false),
+                        LocalityId = c.Int(nullable: true),
                         FacultyId = c.Int(nullable: false),
                         CourseId = c.Int(nullable: false),
                         TomeUH = c.Int(nullable: false),

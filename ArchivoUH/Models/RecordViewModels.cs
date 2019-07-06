@@ -153,8 +153,11 @@ namespace ArchivoUH.Models
             FacultyId = graduated.FacultyId;
             CourseId = graduated.CourseId;
             LocalityId = graduated.LocalityId;
-            CountrySelected = graduated.Locality.Province.Country.CountryName;
-            ProvinceSelected = graduated.Locality.Province.ProvinceName;
+            ProvinceId = graduated.ProvinceId;
+            CountryId = graduated.CountryId;
+            CurrentCountry = graduated.Country.CountryName;
+            CurrentLocality = graduated.Locality.LocalityName?? "";
+            CurrentLocality = graduated.Province.ProvinceName ?? "";
             CurrentFaculty = graduated.Faculty.FacultyName;
             CurrentCourse = graduated.Course.CourseName;
             FacultyFormatter = $"Tomo: {graduated.Faculty.FacultyTome}  Folio: {graduated.Faculty.FacultyFolio}  Número: {graduated.Faculty.FacultyNumber}";
@@ -196,13 +199,18 @@ namespace ArchivoUH.Models
         [RegularExpression("[a-zA-Z]+( [a-zA-Z]+)?", ErrorMessage = "El apellido insertado no es válido, solamente debe contener letras y dos apellidos")]
         public string LastName { get; set; }
 
-        [Required]
-        public int LocalityId { get; set; }
+        public int? LocalityId { get; set; }
 
-        public string CountrySelected { get; set; }
-        public string ProvinceSelected { get; set; }
+        public int? ProvinceId { get; set; }
+
+        [Required(ErrorMessage = "Expecificar la nacionalidad del graduado es obligatorio")]
+        public int? CountryId { get; set; }
+
         public string CurrentFaculty { get; set; }
         public string CurrentCourse { get; set; }
+        public string CurrentCountry { get; set; }
+        public string CurrentProvince { get; set; }
+        public string CurrentLocality { get; set; }
         public string FacultyFormatter { get; }
 
         [Required]

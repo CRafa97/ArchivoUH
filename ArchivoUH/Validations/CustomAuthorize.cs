@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using ArchivoUH.Controllers;
 
 namespace ArchivoUH.Validations
 {

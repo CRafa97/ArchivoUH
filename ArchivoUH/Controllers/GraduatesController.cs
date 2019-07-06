@@ -69,11 +69,11 @@ namespace ArchivoUH.Controllers
                 ViewBag.Faculties = new SelectList(ctx.Faculties, "FacultyId", "FacultyName", model.FacultyId);
                 ViewBag.Courses = new SelectList(ctx.Courses, "CourseId", "CourseName", model.CourseId);
                 var cs = ctx.Countries.ToList();
-                var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId.ToString() == model.CountrySelected) : Enumerable.Empty<Province>()).ToList();
-                var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId.ToString() == (model.ProvinceSelected?? provs[0].ProvinceId.ToString())) : Enumerable.Empty<Locality>()).ToList();
-                ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", model.CountrySelected);
-                ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", model.ProvinceSelected?? provs[0].ProvinceId.ToString());
-                ViewBag.Localities = new SelectList(locals, "LocalityId", "LocalityName", ((model.LocalityId as int?)?? locals[0].LocalityId).ToString());
+                var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId == model.CountryId) : Enumerable.Empty<Province>()).ToList();
+                var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId == (model.ProvinceId?? provs[0].ProvinceId)) : Enumerable.Empty<Locality>()).ToList();
+                ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", model.CountryId);
+                ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", model.ProvinceId?? provs[0].ProvinceId);
+                ViewBag.Localities = new SelectList(locals, "LocalityId", "LocalityName", model.LocalityId?? locals[0].LocalityId);
                 return View(model);
             }
 
@@ -89,7 +89,7 @@ namespace ArchivoUH.Controllers
                 FolioUH = model.FolioUH,
                 TomeUH = model.TomeUH,
                 NumberUH = model.NumberUH,
-                LocalityId = model.LocalityId,
+                LocalityId = model.LocalityId.Value,
                 Observations = model.Observations,
                 GoldTitle = model.GoldTitle,
                 ScientistCredit = model.ScientistCredit,
@@ -120,15 +120,12 @@ namespace ArchivoUH.Controllers
             ViewBag.Courses = new SelectList(ctx.Courses, "CourseId", "CourseName", grad.CourseId);
 
             var cs = ctx.Countries.ToList();
-            var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId == grad.Locality.Province.CountryId) : Enumerable.Empty<Province>()).ToList();
-            var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId == grad.Locality.ProvinceId) : Enumerable.Empty<Locality>()).ToList();
+            var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId == grad.CountryId) : Enumerable.Empty<Province>()).ToList();
+            var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId == grad.ProvinceId) : Enumerable.Empty<Locality>()).ToList();
 
-            var selectCountry = grad.Locality.Province.CountryId.ToString();
-            var selectProv = grad.Locality.Province.ProvinceId.ToString();
-
-            ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", selectCountry);
-            ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", selectProv);
-            ViewBag.Localities = new SelectList(locals, "LocalityId", "LocalityName", grad.LocalityId.ToString());
+            ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", grad.CountryId);
+            ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", grad.ProvinceId);
+            ViewBag.Localities = new SelectList(locals, "LocalityId", "LocalityName", grad.LocalityId);
 
             return View(new GraduatedViewModel(grad));
         }
@@ -144,11 +141,11 @@ namespace ArchivoUH.Controllers
                 ViewBag.Faculties = new SelectList(ctx.Faculties, "FacultyId", "FacultyName", model.FacultyId);
                 ViewBag.Courses = new SelectList(ctx.Courses, "CourseId", "CourseName", model.CourseId);
                 var cs = ctx.Countries.ToList();
-                var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId.ToString() == model.CountrySelected) : Enumerable.Empty<Province>()).ToList();
-                var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId.ToString() == model.ProvinceSelected) : Enumerable.Empty<Locality>()).ToList();
-                ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", model.CountrySelected);
-                ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", model.ProvinceSelected ?? "");
-                ViewBag.Localities = new SelectList(locals, "LocalityId", "LocalityName", (model.LocalityId as int?) ?? locals[0].LocalityId);
+                var provs = (cs.Count != 0 ? ctx.Provinces.ToList().Where(x => x.CountryId == model.CountryId) : Enumerable.Empty<Province>()).ToList();
+                var locals = (provs.Count != 0 ? ctx.Localities.ToList().Where(x => x.ProvinceId == model.ProvinceId) : Enumerable.Empty<Locality>()).ToList();
+                ViewBag.Countries = new SelectList(cs, "CountryId", "CountryName", model.CountryId);
+                ViewBag.Provinces = new SelectList(provs, "ProvinceId", "ProvinceName", model.ProvinceId);
+                ViewBag.Localities = new SelectList(locals, "LocalityId", "LocalityName", model.LocalityId);
                 return View(model);
             }
 
@@ -164,7 +161,7 @@ namespace ArchivoUH.Controllers
             grad.FolioUH = model.FolioUH;
             grad.TomeUH = model.TomeUH;
             grad.NumberUH = model.NumberUH;
-            grad.LocalityId = model.LocalityId;
+            grad.LocalityId = model.LocalityId.Value;
             grad.Observations = model.Observations;
             grad.GoldTitle = model.GoldTitle;
             grad.ScientistCredit = model.ScientistCredit;

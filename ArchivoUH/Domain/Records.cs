@@ -41,13 +41,22 @@ namespace ArchivoUH.Domain
         [StringLength(100)]
         public string LastName { get; set; }
 
-        [Required]
-        public int LocalityId { get; set; }
+        public int? LocalityId { get; set; }
 
         [ForeignKey("LocalityId")]
         public virtual Locality Locality { get; set; }
 
-        //Make relationships
+        public int? ProvinceId { get; set; }
+
+        [ForeignKey("ProvinceId")]
+        public virtual Province Province { get; set; }
+
+        [Required]
+        public int CountryId { get; set; }
+
+        [ForeignKey("CountryId")]
+        public virtual Country Country { get; set; }
+
         [Required]
         public int FacultyId { get; set; } 
 

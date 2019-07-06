@@ -13,7 +13,7 @@ namespace ArchivoUH.Controllers
     public class HomeController : BaseController
     {
         private ApplicationDbContext ctx = new ApplicationDbContext();
-
+        
         public ActionResult Index(string faculty)
         {
             //Collect totals
