@@ -199,12 +199,12 @@
                                             <div class="row">
                                                 <div class="col-md-2"></div>
                                                 <label class="h6 col-md-3">Pais</label>
-                                                @Html.DropDownListFor(m => m.CountrySelected, (SelectList)ViewBag.Countries, htmlAttributes: new { @class = "form-control col-md-5", @id = "Country" })
+                                                @Html.DropDownListFor(m => m.CountryId, (SelectList)ViewBag.Countries, htmlAttributes: new { @class = "form-control col-md-5", @id = "Country" })
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-2"></div>
                                                 <label class="h6 col-md-3">Provincia</label>
-                                                @Html.DropDownListFor(m => m.ProvinceSelected, (SelectList)ViewBag.Provinces, htmlAttributes: new { @class = "form-control col-md-5", @id = "Province" })
+                                                @Html.DropDownListFor(m => m.ProvinceId, (SelectList)ViewBag.Provinces, htmlAttributes: new { @class = "form-control col-md-5", @id = "Province" })
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-2"></div>

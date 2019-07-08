@@ -89,7 +89,9 @@ namespace ArchivoUH.Controllers
                 FolioUH = model.FolioUH,
                 TomeUH = model.TomeUH,
                 NumberUH = model.NumberUH,
-                LocalityId = model.LocalityId.Value,
+                ProvinceId = model.ProvinceId,
+                LocalityId = model.LocalityId,
+                CountryId = model.CountryId.Value,
                 Observations = model.Observations,
                 GoldTitle = model.GoldTitle,
                 ScientistCredit = model.ScientistCredit,
@@ -161,7 +163,9 @@ namespace ArchivoUH.Controllers
             grad.FolioUH = model.FolioUH;
             grad.TomeUH = model.TomeUH;
             grad.NumberUH = model.NumberUH;
-            grad.LocalityId = model.LocalityId.Value;
+            grad.LocalityId = model.LocalityId;
+            grad.CountryId = model.CountryId.Value;
+            grad.ProvinceId = model.ProvinceId;
             grad.Observations = model.Observations;
             grad.GoldTitle = model.GoldTitle;
             grad.ScientistCredit = model.ScientistCredit;

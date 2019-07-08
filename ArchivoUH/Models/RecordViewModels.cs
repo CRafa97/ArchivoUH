@@ -156,8 +156,8 @@ namespace ArchivoUH.Models
             ProvinceId = graduated.ProvinceId;
             CountryId = graduated.CountryId;
             CurrentCountry = graduated.Country.CountryName;
-            CurrentLocality = graduated.Locality.LocalityName?? "";
-            CurrentLocality = graduated.Province.ProvinceName ?? "";
+            CurrentLocality = graduated.Locality != null ? graduated.Locality.LocalityName : "";
+            CurrentProvince = graduated.Province != null ? graduated.Province.ProvinceName : "";
             CurrentFaculty = graduated.Faculty.FacultyName;
             CurrentCourse = graduated.Course.CourseName;
             FacultyFormatter = $"Tomo: {graduated.Faculty.FacultyTome}  Folio: {graduated.Faculty.FacultyFolio}  Número: {graduated.Faculty.FacultyNumber}";

@@ -114,7 +114,11 @@
                                         Nacionalidad
                                     </dt>
                                     <dd>
-                                        @Html.DisplayFor(m => m.CountrySelected)
+                                        País: @Html.DisplayFor(m => m.CurrentCountry)
+                                        <br />
+                                        Provincia: @Html.DisplayFor(m => m.CurrentProvince)
+                                        <br />
+                                        Localidad: @Html.DisplayFor(m => m.CurrentLocality)
                                     </dd>
                                     <dt>
                                         Fechas de Finalización y Expedición
