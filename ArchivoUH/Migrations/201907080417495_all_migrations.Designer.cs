@@ -7,13 +7,13 @@ namespace ArchivoUH.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class migration : IMigrationMetadata
+    public sealed partial class all_migrations : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(migration));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(all_migrations));
         
         string IMigrationMetadata.Id
         {
-            get { return "201906020449142_migration"; }
+            get { return "201907080417495_all_migrations"; }
         }
         
         string IMigrationMetadata.Source

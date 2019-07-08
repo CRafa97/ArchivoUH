@@ -3,7 +3,7 @@ namespace ArchivoUH.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class migration : DbMigration
+    public partial class all_migrations : DbMigration
     {
         public override void Up()
         {
@@ -12,8 +12,8 @@ namespace ArchivoUH.Migrations
                 c => new
                     {
                         AdministrativeId = c.Int(nullable: false, identity: true),
-                        AdministrativeName = c.String(nullable: false, maxLength: 100),
-                        Description = c.String(),
+                        AdministrativeName = c.String(nullable: false, maxLength: 50),
+                        Description = c.String(maxLength: 200),
                         KeyWordId = c.Int(nullable: false),
                         SerialType = c.Int(nullable: false),
                         Serial1 = c.String(nullable: false, maxLength: 3),
@@ -106,15 +106,6 @@ namespace ArchivoUH.Migrations
                 .PrimaryKey(t => t.CountryId);
             
             CreateTable(
-                "dbo.Courses",
-                c => new
-                    {
-                        CourseId = c.Int(nullable: false, identity: true),
-                        CourseName = c.String(nullable: false, maxLength: 100),
-                    })
-                .PrimaryKey(t => t.CourseId);
-            
-            CreateTable(
                 "dbo.Graduateds",
                 c => new
                     {
@@ -122,14 +113,13 @@ namespace ArchivoUH.Migrations
                         FirstName = c.String(nullable: false, maxLength: 100),
                         LastName = c.String(nullable: false, maxLength: 100),
                         LocalityId = c.Int(nullable: true),
+                        ProvinceId = c.Int(nullable: true),
+                        CountryId = c.Int(nullable: false),
                         FacultyId = c.Int(nullable: false),
                         CourseId = c.Int(nullable: false),
                         TomeUH = c.Int(nullable: false),
                         FolioUH = c.Int(nullable: false),
                         NumberUH = c.Int(nullable: false),
-                        FacultyTome = c.Int(nullable: false),
-                        FacultyFolio = c.Int(nullable: false),
-                        FacultyNumber = c.Int(nullable: false),
                         FinishTime = c.DateTime(nullable: false),
                         ExpeditionTime = c.DateTime(nullable: false),
                         ExpeditionCauses = c.String(maxLength: 300),
@@ -141,21 +131,25 @@ namespace ArchivoUH.Migrations
                         SerialType = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.GraduatedId)
+                .ForeignKey("dbo.Countries", t => t.CountryId)
                 .ForeignKey("dbo.Courses", t => t.CourseId)
                 .ForeignKey("dbo.Faculties", t => t.FacultyId)
+                .ForeignKey("dbo.Provinces", t => t.ProvinceId)
                 .ForeignKey("dbo.Localities", t => t.LocalityId)
                 .Index(t => t.LocalityId)
+                .Index(t => t.ProvinceId)
+                .Index(t => t.CountryId)
                 .Index(t => t.FacultyId)
                 .Index(t => t.CourseId);
             
             CreateTable(
-                "dbo.Faculties",
+                "dbo.Courses",
                 c => new
                     {
-                        FacultyId = c.Int(nullable: false, identity: true),
-                        FacultyName = c.String(nullable: false, maxLength: 100),
+                        CourseId = c.Int(nullable: false, identity: true),
+                        CourseName = c.String(nullable: false, maxLength: 100),
                     })
-                .PrimaryKey(t => t.FacultyId);
+                .PrimaryKey(t => t.CourseId);
             
             CreateTable(
                 "dbo.Leaveds",
@@ -177,6 +171,18 @@ namespace ArchivoUH.Migrations
                 .ForeignKey("dbo.Faculties", t => t.FacultyId)
                 .Index(t => t.FacultyId)
                 .Index(t => t.CourseId);
+            
+            CreateTable(
+                "dbo.Faculties",
+                c => new
+                    {
+                        FacultyId = c.Int(nullable: false, identity: true),
+                        FacultyName = c.String(nullable: false, maxLength: 100),
+                        FacultyTome = c.Int(nullable: false),
+                        FacultyFolio = c.Int(nullable: false),
+                        FacultyNumber = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.FacultyId);
             
             CreateTable(
                 "dbo.Localities",
@@ -221,11 +227,13 @@ namespace ArchivoUH.Migrations
             DropForeignKey("dbo.AspNetUserRoles", "IdentityRole_Id", "dbo.IdentityRoles");
             DropForeignKey("dbo.Graduateds", "LocalityId", "dbo.Localities");
             DropForeignKey("dbo.Localities", "ProvinceId", "dbo.Provinces");
+            DropForeignKey("dbo.Graduateds", "ProvinceId", "dbo.Provinces");
             DropForeignKey("dbo.Provinces", "CountryId", "dbo.Countries");
             DropForeignKey("dbo.Graduateds", "FacultyId", "dbo.Faculties");
+            DropForeignKey("dbo.Graduateds", "CourseId", "dbo.Courses");
             DropForeignKey("dbo.Leaveds", "FacultyId", "dbo.Faculties");
             DropForeignKey("dbo.Leaveds", "CourseId", "dbo.Courses");
-            DropForeignKey("dbo.Graduateds", "CourseId", "dbo.Courses");
+            DropForeignKey("dbo.Graduateds", "CountryId", "dbo.Countries");
             DropForeignKey("dbo.Administratives", "KeyWordId", "dbo.KeyWords");
             DropIndex("dbo.Provinces", new[] { "CountryId" });
             DropIndex("dbo.Localities", new[] { "ProvinceId" });
@@ -233,6 +241,8 @@ namespace ArchivoUH.Migrations
             DropIndex("dbo.Leaveds", new[] { "FacultyId" });
             DropIndex("dbo.Graduateds", new[] { "CourseId" });
             DropIndex("dbo.Graduateds", new[] { "FacultyId" });
+            DropIndex("dbo.Graduateds", new[] { "CountryId" });
+            DropIndex("dbo.Graduateds", new[] { "ProvinceId" });
             DropIndex("dbo.Graduateds", new[] { "LocalityId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "IdentityUser_Id" });
             DropIndex("dbo.AspNetUserRoles", new[] { "IdentityRole_Id" });
@@ -242,10 +252,10 @@ namespace ArchivoUH.Migrations
             DropTable("dbo.IdentityRoles");
             DropTable("dbo.Provinces");
             DropTable("dbo.Localities");
-            DropTable("dbo.Leaveds");
             DropTable("dbo.Faculties");
-            DropTable("dbo.Graduateds");
+            DropTable("dbo.Leaveds");
             DropTable("dbo.Courses");
+            DropTable("dbo.Graduateds");
             DropTable("dbo.Countries");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");

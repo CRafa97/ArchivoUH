@@ -208,21 +208,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201906020449142_migration.cs" />
-    <Compile Include="Migrations\201906020449142_migration.Designer.cs">
-      <DependentUpon>201906020449142_migration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906071718298_admin.cs" />
-    <Compile Include="Migrations\201906071718298_admin.Designer.cs">
-      <DependentUpon>201906071718298_admin.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201906091851574_administratives.cs" />
-    <Compile Include="Migrations\201906091851574_administratives.Designer.cs">
-      <DependentUpon>201906091851574_administratives.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201907061942489_change_ubications.cs" />
-    <Compile Include="Migrations\201907061942489_change_ubications.Designer.cs">
-      <DependentUpon>201907061942489_change_ubications.cs</DependentUpon>
+    <Compile Include="Migrations\201907080417495_all_migrations.cs" />
+    <Compile Include="Migrations\201907080417495_all_migrations.Designer.cs">
+      <DependentUpon>201907080417495_all_migrations.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -252,6 +240,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\logo3-2.jpg" />
     <Content Include="sbAdmin\404.html" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml" />
     <None Include="sbAdmin\blankCopy.cshtml" />
     <Content Include="sbAdmin\blank.html" />
     <Content Include="sbAdmin\buttons.html" />
@@ -2119,17 +2108,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201906020449142_migration.resx">
-      <DependentUpon>201906020449142_migration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906071718298_admin.resx">
-      <DependentUpon>201906071718298_admin.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201906091851574_administratives.resx">
-      <DependentUpon>201906091851574_administratives.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201907061942489_change_ubications.resx">
-      <DependentUpon>201907061942489_change_ubications.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201907080417495_all_migrations.resx">
+      <DependentUpon>201907080417495_all_migrations.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
