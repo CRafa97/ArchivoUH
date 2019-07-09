@@ -25,6 +25,8 @@ namespace ArchivoUH.Models
 
         public bool WithExportToExcel { get; set; }
 
+        public bool WithImport { get; set; }
+
         public string TableName { get; set; }
 
         public IEnumerable<string> Headers { get; set; }

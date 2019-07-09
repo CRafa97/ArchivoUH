@@ -27,12 +27,12 @@ namespace ArchivoUH.Models
             IndexTable = new TableViewModel();
         }
 
-        [Required(ErrorMessage = "El campo Serial1 es obligatorio")]
+        //[Required(ErrorMessage = "El campo Serial1 es obligatorio")]
         [RegularExpression("[0-9]+", ErrorMessage = "El campo debe ser un numero")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "Debe ser un numero de 3 digitos exactamente")]
         public string Serial1 { get; set; }
 
-        [Required(ErrorMessage = "El campo Serial2 es obligatorio")]
+        //[Required(ErrorMessage = "El campo Serial2 es obligatorio")]
         [RegularExpression("[0-9]+", ErrorMessage = "El campo debe ser un numero")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "Debe ser un numero de 3 digitos exactamente")]
         public string Serial2 { get; set; }
@@ -85,12 +85,12 @@ namespace ArchivoUH.Models
             IndexTable = new TableViewModel();
         }
 
-        [Required(ErrorMessage = "El campo Serial1 es obligatorio")]
+        //[Required(ErrorMessage = "El campo Serial1 es obligatorio")]
         [RegularExpression("[0-9]+", ErrorMessage = "El campo Serial1 debe ser un numero")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "El campo Serial1 debe ser un numero de 3 digitos exactamente")]
         public string Serial1 { get; set; }
 
-        [Required(ErrorMessage = "El campo Serial2 es obligatorio")]
+        //[Required(ErrorMessage = "El campo Serial2 es obligatorio")]
         [RegularExpression("[0-9]+", ErrorMessage = "El campo Serial2 debe ser un numero")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "El campo Serial2 debe ser un numero de 3 digitos exactamente")]
         public string Serial2 { get; set; }
@@ -145,8 +145,8 @@ namespace ArchivoUH.Models
         public GraduatedViewModel(Graduated graduated)
         {
             GraduatedId = graduated.GraduatedId;
-            Serial1 = graduated.Serial1;
-            Serial2 = graduated.Serial2;
+            Serial1 = graduated.Serial1?? "000";
+            Serial2 = graduated.Serial2 ?? "000"; 
             SerialType = graduated.SerialType;
             FirstName = graduated.FirstName;
             LastName = graduated.LastName;
@@ -160,7 +160,7 @@ namespace ArchivoUH.Models
             CurrentProvince = graduated.Province != null ? graduated.Province.ProvinceName : "";
             CurrentFaculty = graduated.Faculty.FacultyName;
             CurrentCourse = graduated.Course.CourseName;
-            FacultyFormatter = $"Tomo: {graduated.Faculty.FacultyTome}  Folio: {graduated.Faculty.FacultyFolio}  Número: {graduated.Faculty.FacultyNumber}";
+            FacultyFormatter = $"Tomo: {graduated.FacultyTome}  Folio: {graduated.FacultyFolio}  Número: {graduated.FacultyNumber}";
             TomeUH = graduated.TomeUH;
             FolioUH = graduated.FolioUH;
             NumberUH = graduated.NumberUH;
@@ -173,12 +173,12 @@ namespace ArchivoUH.Models
             IndexTable = new TableViewModel(); 
         }
 
-        [Required(ErrorMessage = "El campo Serial1 es obligatorio")]
+        //[Required(ErrorMessage = "El campo Serial1 es obligatorio")]
         [RegularExpression("[0-9]+", ErrorMessage = "El campo Serial1 debe ser un numero")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "El campo Serial1 debe ser un numero de 3 digitos exactamente")]
         public string Serial1 { get; set; }
 
-        [Required(ErrorMessage = "El campo Serial2 es obligatorio")]
+        //[Required(ErrorMessage = "El campo Serial2 es obligatorio")]
         [RegularExpression("[0-9]+", ErrorMessage = "El campo Serial2 debe ser un numero")]
         [StringLength(3, MinimumLength = 3, ErrorMessage = "El campo Serial2 debe ser un numero de 3 digitos exactamente")]
         public string Serial2 { get; set; }
@@ -191,12 +191,12 @@ namespace ArchivoUH.Models
 
         [Required(ErrorMessage = "El campo Nombre es obligatorio")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "El nombre debe ser más largo que dos caracteres")]
-        [RegularExpression("[a-zA-Z]+( [a-zA-Z]+)?", ErrorMessage = "El nombre insertado no es válido, solamente debe contener letras y dos nombres")]
+        //[RegularExpression("[a-zA-Z]+( [a-zA-Z]+)?", ErrorMessage = "El nombre insertado no es válido, solamente debe contener letras y dos nombres")]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = "El campo Apellidos es obligatorio")]
         [StringLength(100, MinimumLength = 2, ErrorMessage = "El apellido debe ser más largo que dos caracteres")]
-        [RegularExpression("[a-zA-Z]+( [a-zA-Z]+)?", ErrorMessage = "El apellido insertado no es válido, solamente debe contener letras y dos apellidos")]
+        //[RegularExpression("[a-zA-Z]+( [a-zA-Z]+)?", ErrorMessage = "El apellido insertado no es válido, solamente debe contener letras y dos apellidos")]
         public string LastName { get; set; }
 
         public int? LocalityId { get; set; }
@@ -220,16 +220,28 @@ namespace ArchivoUH.Models
         public int CourseId { get; set; }
 
         [Required(ErrorMessage = "El tomo UH es obligatorio")]
-        [Range(0, 200)]
+        [Range(0, int.MaxValue, ErrorMessage = "El tomo UH debe ser un entero positivo")]
         public int TomeUH { get; set; }
 
         [Required(ErrorMessage = "El folio UH es obligatorio")]
-        [Range(0, 200)]
+        [Range(0, int.MaxValue, ErrorMessage = "El folio UH debe ser un entero positivo")]
         public int FolioUH { get; set; }
 
         [Required(ErrorMessage = "El número UH es obligatorio")]
-        [Range(0, 200)]
+        [Range(0, int.MaxValue, ErrorMessage = "El número UH debe ser un entero positivo")]
         public int NumberUH { get; set; }
+
+        [Required(ErrorMessage = "El tomo de la facultad es requerido")]
+        [Range(0, int.MaxValue, ErrorMessage = "El tomo de la facultad debe ser un entero positivo")]
+        public int FacultyTome { get; set; }
+
+        [Required(ErrorMessage = "El folio de la facultad es requerido")]
+        [Range(0, int.MaxValue, ErrorMessage = "El folio de la facultad debe ser un entero positivo")]
+        public int FacultyFolio { get; set; }
+
+        [Required(ErrorMessage = "El número de la facultad es requerido")]
+        [Range(0, int.MaxValue, ErrorMessage = "El número de la facultad debe ser un entero positivo")]
+        public int FacultyNumber { get; set; }
 
         //Dates
         [Required(ErrorMessage = "La fecha de finalización es obligatoria")]

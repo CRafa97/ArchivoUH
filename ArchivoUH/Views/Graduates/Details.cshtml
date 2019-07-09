@@ -93,12 +93,6 @@
                                         @Html.DisplayFor(m => m.CurrentFaculty)
                                     </dd>
                                     <dt>
-                                        Serial de Facultad
-                                    </dt>
-                                    <dd>
-                                        @Html.DisplayFor(m => m.FacultyFormatter)
-                                    </dd>
-                                    <dt>
                                         Carrera
                                     </dt>
                                     <dd>
@@ -109,6 +103,12 @@
                                     </dt>
                                     <dd>
                                         @Html.DisplayFor(m => m.UHFormatter)
+                                    </dd>
+                                    <dt>
+                                        Serial de Facultad
+                                    </dt>
+                                    <dd>
+                                        @Html.DisplayFor(m => m.FacultyFormatter)
                                     </dd>
                                     <dt>
                                         Nacionalidad
@@ -124,7 +124,9 @@
                                         Fechas de Finalización y Expedición
                                     </dt>
                                     <dd>
-                                        @Html.DisplayFor(m => m.FinishTime) --- @Html.DisplayFor(m => m.ExpeditionTime)
+                                        Finalización: @Html.DisplayFor(m => m.ExpeditionTime)
+                                        <br />
+                                        Expedición: @Html.DisplayFor(m => m.FinishTime)
                                     </dd>
                                     <dt>
                                         Causas

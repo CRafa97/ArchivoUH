@@ -97,6 +97,7 @@
                                                     <i class="font-weight-bold">OLD</i>
                                                 </div>
                                             </div>
+                                            <br />
                                             <div class="row">
                                                 <div class="col-md-2"></div>
                                                 <label class="h6 col-md-2">Serial 1</label>
@@ -128,6 +129,7 @@
                                                 </div>
                                             </div>
                                             <!-- Date -->
+                                            <br />
                                             <div class="row">
                                                 <div class="col-md-1"></div>
                                                 <label class="h6 col-md-3">Finalización</label>
@@ -153,6 +155,7 @@
                                                     para vaciarlos, elimine la información que contienen
                                                 </div>
                                             </div>
+                                            <br />
                                             <!-- Causes -->
                                             <div class="row">
                                                 <div class="col-md-2"></div>
@@ -167,7 +170,15 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <br /> <br />
+                                    <center>
+                                        <a class="btn btn-success btn-icon-split">
+                                            <input type="submit" value="Editar" class="btn btn-success" />
+                                            <span class="icon text-white-50">
+                                                <i class="fas fa-pen-alt"></i>
+                                            </span>
+                                        </a>
+                                    </center>
                                 </div>
 
                                 <div class="col-lg-6">
@@ -238,19 +249,28 @@
                                             </div>
                                             <br />
                                             <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <label class="h6 col-md-3">Tomo UH</label>
-                                                @Html.EditorFor(m => m.TomeUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                                <div class="col-md-1"></div>
+                                                <label class="h6 col-md-2">Tomo UH</label>
+                                                @Html.EditorFor(m => m.TomeUH, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                                                <div class="col-md-1"></div>
+                                                <div class="h6 col-md-2">Tomo Facultad</div>
+                                                @Html.EditorFor(m => m.FacultyTome, new { htmlAttributes = new { @class = "form-control col-md-2" } })
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <label class="h6 col-md-3">Folio UH</label>
-                                                @Html.EditorFor(m => m.FolioUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                                <div class="col-md-1"></div>
+                                                <label class="h6 col-md-2">Folio UH</label>
+                                                @Html.EditorFor(m => m.FolioUH, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                                                <div class="col-md-1"></div>
+                                                <div class="h6 col-md-2">Folio Facultad</div>
+                                                @Html.EditorFor(m => m.FacultyFolio, new { htmlAttributes = new { @class = "form-control col-md-2" } })
                                             </div>
                                             <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <label class="h6 col-md-3">Número UH</label>
-                                                @Html.EditorFor(m => m.NumberUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                                <div class="col-md-1"></div>
+                                                <label class="h6 col-md-2">Número UH</label>
+                                                @Html.EditorFor(m => m.NumberUH, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                                                <div class="col-md-1"></div>
+                                                <div class="h6 col-md-2">Número Facultad</div>
+                                                @Html.EditorFor(m => m.FacultyNumber, new { htmlAttributes = new { @class = "form-control col-md-2" } })
                                             </div>
                                         </div>
                                     </div>
@@ -281,15 +301,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <center>
-                                <a class="btn btn-success btn-icon-split">
-                                    <input type="submit" value="Editar" class="btn btn-success" />
-                                    <span class="icon text-white-50">
-                                        <i class="fas fa-pen-alt"></i>
-                                    </span>
-                                </a>
-                            </center>
                         }
                     </div>
 

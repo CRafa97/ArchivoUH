@@ -18,15 +18,12 @@ namespace ArchivoUH.Controllers
         // GET: Faculties
         public ActionResult Index()
         {
-            var headers = new string[] { "Key", "Nombre", "Tomo", "Folio", "Numero" };
+            var headers = new string[] { "Key", "Nombre" };
             var rows = (from fac in ctx.Faculties.ToList()
                         select new
                         {
                             Key = fac.FacultyId,
                             Nombre = fac.FacultyName,
-                            Tomo = fac.FacultyTome,
-                            Folio = fac.FacultyFolio,
-                            Numero = fac.FacultyNumber
                         });
 
             var model = new FacultyViewModel()
@@ -47,9 +44,6 @@ namespace ArchivoUH.Controllers
                             {
                                 Key = fac.FacultyId,
                                 Nombre = fac.FacultyName,
-                                Tomo = fac.FacultyTome,
-                                Folio = fac.FacultyFolio,
-                                Numero = fac.FacultyNumber
                             });
                 model.IndexTable = new TableViewModel("Facultades", headers, rows);
                 return View("Index", model);
@@ -57,10 +51,7 @@ namespace ArchivoUH.Controllers
 
             var faculty = new Faculty()
             {
-                FacultyName = model.FacultyName,
-                FacultyFolio = model.FacultyFolio,
-                FacultyNumber = model.FacultyNumber,
-                FacultyTome = model.FacultyTome
+                FacultyName = model.FacultyName
             };
 
             ctx.Faculties.Add(faculty);
@@ -86,9 +77,6 @@ namespace ArchivoUH.Controllers
             var faculty = ctx.Faculties.Find(model.FacultyId);
 
             faculty.FacultyName = model.FacultyName;
-            faculty.FacultyNumber = model.FacultyNumber;
-            faculty.FacultyFolio = model.FacultyFolio;
-            faculty.FacultyTome = model.FacultyTome;
 
             ctx.SaveChanges();
             return RedirectToAction("Index");

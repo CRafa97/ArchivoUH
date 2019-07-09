@@ -58,6 +58,7 @@
 
                     @{
                         Model.IndexTable.WithCreateLink = true;
+                        Model.IndexTable.WithImport = true;
                         Model.IndexTable.WithExportToExcel = true;
                         Html.RenderPartial("_DataTable", Model.IndexTable);
                     }

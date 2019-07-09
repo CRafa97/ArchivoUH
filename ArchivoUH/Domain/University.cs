@@ -22,18 +22,6 @@ namespace ArchivoUH.Domain
         [StringLength(100)]
         public string FacultyName { get; set; }
 
-        [Required]
-        [Range(0, 200)]
-        public int FacultyTome { get; set; }
-
-        [Required]
-        [Range(0, 200)]
-        public int FacultyFolio { get; set; }
-
-        [Required]
-        [Range(0, 200)]
-        public int FacultyNumber { get; set; }
-
         public virtual ICollection<Graduated> Graduates { get; set; }
 
         public virtual ICollection<Leaved> Leaves { get; set; }

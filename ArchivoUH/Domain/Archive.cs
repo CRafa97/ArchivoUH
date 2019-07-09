@@ -18,7 +18,7 @@ namespace ArchivoUH.Domain
         public int KeyWordId { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(200)]
         public string Name { get; set; }
 
         public ICollection<Administrative> Administratives { get; set; }

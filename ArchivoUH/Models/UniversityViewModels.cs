@@ -42,9 +42,6 @@ namespace ArchivoUH.Models
         {
             FacultyId = faculty.FacultyId;
             FacultyName = faculty.FacultyName;
-            FacultyTome = faculty.FacultyTome;
-            FacultyNumber = faculty.FacultyNumber;
-            FacultyFolio = faculty.FacultyFolio;
             IndexTable = new TableViewModel();
         }
 
@@ -54,18 +51,6 @@ namespace ArchivoUH.Models
         [Required(ErrorMessage = "El nombre de la facultad es obligatorio")]
         [StringLength(100)]
         public string FacultyName { get; set; }
-
-        [Required (ErrorMessage = "El tomo de la facultad es requerido")]
-        [Range(0, 200, ErrorMessage = "Debe ser un entero en el rango 0 - 200")]
-        public int FacultyTome { get; set; }
-
-        [Required(ErrorMessage = "El folio de la facultad es requerido")]
-        [Range(0, 200, ErrorMessage = "Debe ser un entero en el rango 0 - 200")]
-        public int FacultyFolio { get; set; }
-
-        [Required(ErrorMessage = "El numero de la facultad es requerido")]
-        [Range(0, 200, ErrorMessage = "Debe ser un entero en el rango 0 - 200")]
-        public int FacultyNumber { get; set; }
 
         public TableViewModel IndexTable { get; set; }
     }

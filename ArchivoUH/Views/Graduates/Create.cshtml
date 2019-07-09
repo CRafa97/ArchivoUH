@@ -50,7 +50,7 @@
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                    <!-- Add Elements Here... -->
+                    <!-- Add Elements Here... -->  
                     <!-- Page Heading -->
                     <h1 class="h3 mb-4 text-gray-800">Formulario: Añadir Graduado</h1>
 
@@ -92,6 +92,7 @@
                                                 <i class="font-weight-bold">OLD</i>
                                             </div>
                                         </div>
+                                        <br />
                                         <div class="row">
                                             <div class="col-md-2"></div>
                                             <label class="h6 col-md-2">Serial 1</label>
@@ -122,6 +123,7 @@
                                                 La fecha de expedición debe ser posterior a la fecha de finalización
                                             </div>
                                         </div>
+                                        <br />
                                         <!-- Date -->
                                         <div class="row">
                                             <div class="col-md-1"></div>
@@ -148,6 +150,7 @@
                                             </div>
                                         </div>
                                         <!-- Causes -->
+                                        <br />
                                         <div class="row">
                                             <div class="col-md-2"></div>
                                             <label class="h6 col-md-2">Causas</label>
@@ -161,7 +164,15 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <br />
+                                <center>
+                                    <a class="btn btn-success btn-icon-split">
+                                        <input type="submit" value="Añadir" class="btn btn-success" />
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+                                    </a>
+                                </center>
                             </div>
 
                             <div class="col-lg-6">
@@ -216,7 +227,7 @@
                                         <div class="border-left-success">
                                             <div class="card-body">
                                                 Seleccione la Facultad y la Carrera a la que pertenece el estudiante graduado,
-                                                además de los números UH
+                                                además de los datos del registro de la UH y de la Facultad
                                             </div>
                                         </div>
                                         <div class="row">
@@ -232,19 +243,28 @@
                                         </div>
                                         <br />
                                         <div class="row">
-                                            <div class="col-md-2"></div>
-                                            <label class="h6 col-md-3">Tomo UH</label>
-                                            @Html.EditorFor(m => m.TomeUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                            <div class="col-md-1"></div>
+                                            <label class="h6 col-md-2">Tomo UH</label>
+                                            @Html.EditorFor(m => m.TomeUH, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                                            <div class="col-md-1"></div>
+                                            <div class="h6 col-md-2">Tomo Facultad</div>
+                                            @Html.EditorFor(m => m.FacultyTome, new { htmlAttributes = new { @class = "form-control col-md-2" } })
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-2"></div>
-                                            <label class="h6 col-md-3">Folio UH</label>
-                                            @Html.EditorFor(m => m.FolioUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                            <div class="col-md-1"></div>
+                                            <label class="h6 col-md-2">Folio UH</label>
+                                            @Html.EditorFor(m => m.FolioUH, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                                            <div class="col-md-1"></div>
+                                            <div class="h6 col-md-2">Folio Facultad</div>
+                                            @Html.EditorFor(m => m.FacultyFolio, new { htmlAttributes = new { @class = "form-control col-md-2" } })
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-2"></div>
-                                            <label class="h6 col-md-3">Número UH</label>
-                                            @Html.EditorFor(m => m.NumberUH, new { htmlAttributes = new { @class = "form-control col-md-5" } })
+                                            <div class="col-md-1"></div>
+                                            <label class="h6 col-md-2">Número UH</label>
+                                            @Html.EditorFor(m => m.NumberUH, new { htmlAttributes = new { @class = "form-control col-md-2" } })
+                                            <div class="col-md-1"></div>
+                                            <div class="h6 col-md-2">Número Facultad</div>
+                                            @Html.EditorFor(m => m.FacultyNumber, new { htmlAttributes = new { @class = "form-control col-md-2" } })
                                         </div>
                                     </div>
                                 </div>
@@ -276,15 +296,6 @@
 
                             </div>
                         </div>
-
-                        <center>
-                            <a class="btn btn-success btn-icon-split">
-                                <input type="submit" value="Añadir" class="btn btn-success" />
-                                <span class="icon text-white-50">
-                                    <i class="fas fa-check"></i>
-                                </span>
-                            </a>
-                        </center>
                     }
                 </div>
                 <!-- /.container-fluid -->

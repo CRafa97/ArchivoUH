@@ -11,6 +11,19 @@
         <div class="row">
             <h5 class="m-0 font-weight-bold text-primary col-md-8">@Model.TableName</h5>
 
+            @if (Model.WithImport)
+            {
+                using (Html.BeginForm("UploadExcel", "Graduates", FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "return myFunction()" }))
+                {
+                    <div class="col-md-5">
+                        <a class="btn btn-primary btn-icon-split">
+                            <input type="file" id="FileUpload" name="FileUpload" class="btn btn-primary" />
+                            <input type="submit" value="Importar" id="btnSubmit" class="btn btn-primary"/>
+                        </a>
+                    </div>
+                }
+            }
+
             @if (Model.WithExportToExcel)
             {
                 <div class="col-md-2">
@@ -26,7 +39,7 @@
             }
             else
             {
-                <div class="col-md-2"></div>
+                <div class="col-md-4"></div>
             }
 
             @if (Model.WithCreateLink)

@@ -9,18 +9,18 @@ namespace ArchivoUH.Domain
 {
     public enum SerialType
     {
-        ADM,
         NEW,
-        OLD
+        OLD,
+        ADM,
     }
 
     public abstract class Record
     {
-        [Required]
+        //[Required]
         [StringLength(3, MinimumLength = 3)]
         public string Serial1 { get; set; }
 
-        [Required]
+        //[Required]
         [StringLength(3, MinimumLength = 3)]
         public string Serial2 { get; set; }
 
@@ -71,28 +71,31 @@ namespace ArchivoUH.Domain
 
         //UH Data
         [Required]
-        [Range(0,200)]
         public int TomeUH { get; set; }
 
         [Required]
-        [Range(0,200)]
         public int FolioUH { get; set; }
 
         [Required]
-        [Range(0,200)]
         public int NumberUH { get; set; }
+
+        // Faculty Data
+        [Required]
+        public int FacultyTome { get; set; }
+
+        [Required]
+        public int FacultyFolio { get; set; }
+
+        [Required]
+        public int FacultyNumber { get; set; }
 
         //Dates
         [Required]
         [DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        //[Range(typeof(DateTime), "1800-01-01", "2100-01-01")]
         public DateTime FinishTime { get; set; }
 
         [Required]
         [DataType(DataType.Date)]
-        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        //[Range(typeof(DateTime), "1800-01-01", "2100-01-01")]
         public DateTime ExpeditionTime { get; set; }
 
         [DataType(DataType.MultilineText)]
@@ -135,8 +138,6 @@ namespace ArchivoUH.Domain
 
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
-        [Range(typeof(DateTime), "1800-01-01", "2100-01-01")]
         public DateTime LeavedDate { get; set; }
 
         [DataType(DataType.MultilineText)]
